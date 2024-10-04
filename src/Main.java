@@ -25,10 +25,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int inputId = scanner.nextInt();
 
-        int currentId;
+        int currentId = 0;
         long currentTime;
-        double currentCredit;
-        double currentTimeCredit;
+        double currentCredit = 0;
+        double currentTimeCredit = 0;
         int currentCarPark = 0;
 
         boolean isValid = false;
@@ -42,7 +42,7 @@ public class Main {
                 currentCarPark = student.carPark;
                 System.out.println("Login successful");
                 System.out.println("Time: " + currentTime);
-                System.out.println("Price: " + currentCredit);
+                System.out.println("Credit: " + currentCredit);
                 System.out.println("Time Avaliable: " + currentTimeCredit);
                 System.out.println("Car Park: " + (currentCarPark == 0 ? "No" : "Yes"));
             }
@@ -81,20 +81,29 @@ public class Main {
         }
 
         //Add more credit to the student so he can pay 
-        /*
+        
         if (currentTimeCredit<0)
         {
             System.out.println("You currently have less credit that you need to pay do you wish to add credit");
             System.out.println("Y/N");
         }
 
-        Scanner scannerMoreCredit = new Scanner(System.in);
-        String inputMoreCredut = scannerMoreCredit.nextLine();
+        String inputMoreCredit = scanner.next();
 
-        if(inputMoreCredut.equals("Y"))
+        if(inputMoreCredit.equals("Y"))
         {
             System.out.println("How much credit do you want to deposit");
+            int inputNumberCredit = scanner.nextInt();
+
+            for (Student student : students) {
+                if (student.id == currentId) { 
+                    student.credit = currentCredit + inputNumberCredit; 
+                    currentCredit = student.credit;
+                }
+            }
+
+            System.out.println("Your current credit is :" + currentCredit);
         }
-       */
+       
     }
 }
