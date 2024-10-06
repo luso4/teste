@@ -11,12 +11,12 @@ public class Main {
         List<Student> students = new ArrayList<>();
 
         for (int i = 1; i <= 49999; i++) {
-            long time = System.currentTimeMillis();  
+            long time = System.currentTimeMillis(); 
             double credit = Math.random() * 100;
-            double timeCredit = time/15;
-            timeCredit = timeCredit*0.1;
-            timeCredit = credit-timeCredit;
-            timeCredit = timeCredit/0.1;
+            long timeCredit = time/15;
+            timeCredit = (long) (timeCredit * 0.1); 
+            timeCredit = (long) (credit - timeCredit);
+            timeCredit = (long) (timeCredit / 0.1); 
             timeCredit = timeCredit*15;
             int carPark = (int) (Math.random() * 2);
             students.add(new Student(i, time, credit, timeCredit, carPark));
@@ -50,10 +50,11 @@ public class Main {
                 //Convert the time from minutes to hours and minutes in order for the student to check propelly the time - 40381
                 currentTimeHours = currentTime/60;
                 currentTimeMinutes = currentTime % 60;
-                System.out.println("Time: " + currentTimeHours + " Hours : " + currentTimeMinutes + "Minutes");
+                System.out.println("Time: " + currentTimeHours + " Hours : " + currentTimeMinutes + " Minutes");
                 System.out.println("Credit: " + currentCredit);
-                
-                System.out.println("Time Avaliable: " + currentTimeCredit);
+                currentTimeHoursAvailable = (long) Math.floor(currentTimeCredit / 60);
+                currentTimeMinutesAvailable = (long) currentTimeCredit % 60;
+                System.out.println("Time Avaliable: " + currentTimeHoursAvailable + " Hours : " + currentTimeMinutesAvailable + " Minutes");
                 System.out.println("Car Park: " + (currentCarPark == 0 ? "No" : "Yes"));
             }
         }
