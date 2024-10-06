@@ -51,7 +51,7 @@ public class Main {
                 currentTimeHours = currentTime/60;
                 currentTimeMinutes = currentTime % 60;
                 System.out.println("Time: " + currentTimeHours + " Hours : " + currentTimeMinutes + " Minutes");
-                System.out.println("Credit: " + currentCredit);
+                System.out.println("Credit: " + currentCredit + " €"); // Added the € symbol - 40381
                 currentTimeHoursAvailable = (long) Math.floor(currentTimeCredit / 60);
                 currentTimeMinutesAvailable = (long) currentTimeCredit % 60;
                 System.out.println("Time Avaliable: " + currentTimeHoursAvailable + " Hours : " + currentTimeMinutesAvailable + " Minutes");
@@ -113,7 +113,7 @@ public class Main {
                 }
             }
 
-            System.out.println("Your current credit is :" + currentCredit);
+            System.out.println("Your current credit is :" + currentCredit + " €");
         }
        
     }
