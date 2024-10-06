@@ -19,7 +19,7 @@ public class Main {
             timeCredit = (long) (timeCredit / 0.1); 
             timeCredit = timeCredit*15;
             int carPark = (int) (Math.random() * 2);
-            students.add(new Student(i, time, credit, timeCredit, carPark));
+            students.add(new Student(i, time, credit, timeCredit, carPark));// teste salgado
         }
         // Read the response of the student - 40381
         Scanner scanner = new Scanner(System.in);
