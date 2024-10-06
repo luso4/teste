@@ -21,9 +21,10 @@ public class Main {
         int carsInPark = 0;  // Counter for currently parked cars - 42872
 
 
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 1; i <= 800; i++) {
             long time = 300;
-            double credit = 1;
+            double credit = Math.random() * (10 - 1);
+            credit = ((int)(credit * 100)) / 100.0;
             //Change too double to allow the math in decimals - 40381
             double timeCredit = time / 15;
             timeCredit = (double) (timeCredit * 0.1);
@@ -143,6 +144,7 @@ public class Main {
                     currentTimeCredit = (currentTimeCredit * 0.1);
                     currentTimeCredit = (currentTimeCredit - currentCredit);
                     currentTimeCredit = currentTimeCredit * (-1); //Text that only show up if the credit is negative - 40381
+                    currentTimeCredit = ((int)(currentTimeCredit * 100)) / 100.0;
                     System.out.println("You need to add " + currentTimeCredit + " €");
                     System.out.println("How much credit do you want to deposit?");
                     int inputNumberCredit = scanner.nextInt();
