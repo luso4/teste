@@ -10,9 +10,9 @@ public class Main {
         //Create data for the student - 40381
         List<Student> students = new ArrayList<>();
 
-        // Maximum capacity of 500 cars in the parking lot
+        // Maximum capacity of 500 cars in the parking lot - 42872
         int maxCarCapacity = 500;
-        int carsInPark = 0;  // Counter for currently parked cars
+        int carsInPark = 0;  // Counter for currently parked cars - 42872
 
         for (int i = 1; i <= 49999; i++) {
             long time = System.currentTimeMillis(); 
@@ -23,7 +23,7 @@ public class Main {
             timeCredit = (long) (timeCredit / 0.1); 
             timeCredit = timeCredit*15;
             int carPark = (int) (Math.random() * 2);
-            // Count how many cars are initially parked
+            // Count how many cars are initially parked - 42872
             if (carPark == 1) {
                 carsInPark++;
             }
