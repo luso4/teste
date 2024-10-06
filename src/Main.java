@@ -113,7 +113,7 @@ public class Main {
                 }
             }
 
-            System.out.println("Your current credit is :" + currentCredit + " €");
+            System.out.println("Your current credit is :" + currentCredit + " €"); // Added the € symbol - 40381
         }
        
     }
