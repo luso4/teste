@@ -119,8 +119,15 @@ public class Main {
                 String inputAddCredit = scanner.next();
 
                 if (inputAddCredit.equalsIgnoreCase("Y")) {
+                    //Math to see whats the minimum the user need to add in order to remove the car - 40381
+                    currentTimeCredit = currentTimeCredit / 15;
+                    currentTimeCredit = (currentTimeCredit * 0.1);
+                    currentTimeCredit = (currentTimeCredit - currentCredit);
+                    currentTimeCredit = currentTimeCredit * (-1); //Text that only show up if the credit is negative - 40381
+                    System.out.println("You need to add " + currentTimeCredit + " €");
                     System.out.println("How much credit do you want to deposit?");
                     int inputNumberCredit = scanner.nextInt();
+
 
                     // Update the student's credit - 42872
                     for (Student student : students) {
@@ -150,40 +157,7 @@ public class Main {
                     }
                 }
             }
-            //Add more credit to the student so he can pay - 40381
-            if (currentTimeCredit < 0) {
-                System.out.println("You currently have less credit that you need to pay do you wish to add credit");
-                System.out.println("Y/N");
 
-            }
-
-            String inputMoreCredit = scanner.next();
-
-            if (inputMoreCredit.equals("Y")) {
-
-
-                //Math to see whats the minimum the user need to add in order to remove the car - 40381
-
-                currentTimeCredit = currentTimeCredit / 15;
-                currentTimeCredit = (currentTimeCredit * 0.1);
-                currentTimeCredit = (currentTimeCredit - currentCredit);
-                currentTimeCredit = currentTimeCredit * (-1);
-                //Text that only show up if the credit is negative - 40381
-                if (currentTimeCredit > 0) {
-                    System.out.println("You need to add " + currentTimeCredit + " €");
-                }
-                System.out.println("How much credit do you want to deposit");
-                int inputNumberCredit = scanner.nextInt();
-
-                for (Student student : students) {
-                    if (student.id == currentId) {
-                        student.credit = currentCredit + inputNumberCredit;
-                        currentCredit = student.credit;
-                    }
-                }
-
-                System.out.println("Your current credit is :" + currentCredit + " €"); // Added the € symbol - 40381
-            }
 
         }
     }
