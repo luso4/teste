@@ -3,10 +3,10 @@ public class Student {
     int id;
     long time;
     double credit;
-    long timeCredit; // Time that the student has avaliable in the park - 40381 ; Change to long - 40381
+    double timeCredit; // Time that the student has avaliable in the park - 40381
     int carPark; // TO check if the car is inside - 40381
 
-    public Student (int id, long time, double credit, long timeCredit, int carPark )
+    public Student (int id, long time, double credit, double timeCredit, int carPark )
     {
         this.id = id;
         this.time = time;

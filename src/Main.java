@@ -10,23 +10,16 @@ public class Main {
         //Create data for the student - 40381
         List<Student> students = new ArrayList<>();
 
-        // Maximum capacity of 500 cars in the parking lot - 42872
-        int maxCarCapacity = 500;
-        int carsInPark = 0;  // Counter for currently parked cars - 42872
-
-        for (int i = 1; i <= 49999; i++) {
-            long time = System.currentTimeMillis(); 
-            double credit = Math.random() * 100;
-            long timeCredit = time/15;
-            timeCredit = (long) (timeCredit * 0.1); 
-            timeCredit = (long) (credit - timeCredit);
-            timeCredit = (long) (timeCredit / 0.1); 
-            timeCredit = timeCredit*15;
+        for (int i = 1; i <= 2; i++) {
+            long time = 300; 
+            double credit = 1;
+            //Change too double to allow the math in decimals - 40381
+            double timeCredit = time/15;
+            timeCredit = (double) (timeCredit * 0.1); 
+            timeCredit = (double) (credit - timeCredit);
+            timeCredit = (double) (timeCredit / 0.1); 
+            timeCredit = (long)timeCredit*15;
             int carPark = (int) (Math.random() * 2);
-            // Count how many cars are initially parked - 42872
-            if (carPark == 1) {
-                carsInPark++;
-            }
             students.add(new Student(i, time, credit, timeCredit, carPark));
         }
         // Read the response of the student - 40381
@@ -59,7 +52,7 @@ public class Main {
                 currentTimeHours = currentTime/60;
                 currentTimeMinutes = currentTime % 60;
                 System.out.println("Time: " + currentTimeHours + " Hours : " + currentTimeMinutes + " Minutes");
-                System.out.println("Credit: " + currentCredit);
+                System.out.println("Credit: " + currentCredit + " €"); // Added the € symbol - 40381
                 currentTimeHoursAvailable = (long) Math.floor(currentTimeCredit / 60);
                 currentTimeMinutesAvailable = (long) currentTimeCredit % 60;
                 System.out.println("Time Avaliable: " + currentTimeHoursAvailable + " Hours : " + currentTimeMinutesAvailable + " Minutes");
@@ -74,27 +67,29 @@ public class Main {
        
 
         //Add the car of the student to the park - 40381
-
-
-        if (currentCarPark == 0) {
-            // Check if there are available parking spots
-            if (carsInPark >= maxCarCapacity) {
-                System.out.println("The parking lot is full. No more cars can be parked.");
-            } else {
-                System.out.println("Do you wish to park your car?");
-                System.out.println("Y/N");
-                String inputCarPark = scanner.next();
-
-                if (inputCarPark.equalsIgnoreCase("Y")) {
-                    currentCarPark = 1;
-                    carsInPark++;  // Increment the number of parked cars
-                    System.out.println("The car was parked.");
-                } else {
-                    System.out.println("OK");
-                }
+        
+       
+        if (currentCarPark == 0)
+        {
+            
+            System.out.println("Do you wish to park your car?");
+            System.out.println("Y/N");
+            String inputCarPark = scanner.next();
+            
+            if (inputCarPark.equalsIgnoreCase("Y"))
+            {
+                currentCarPark = 1;
+                System.out.println("The Car was park");
             }
-        } else {
-            System.out.println("Your car is already parked.");
+            else
+            {
+                currentCarPark = 0;
+                System.out.println("OK");
+            }
+        }
+        else
+        {
+            System.out.println("All Done For Now");
         }
 
         //Add more credit to the student so he can pay - 40381
@@ -103,12 +98,26 @@ public class Main {
         {
             System.out.println("You currently have less credit that you need to pay do you wish to add credit");
             System.out.println("Y/N");
+
         }
 
         String inputMoreCredit = scanner.next();
 
         if(inputMoreCredit.equals("Y"))
         {
+
+
+            //Math to see whats the minimum the user need to add in order to remove the car - 40381
+
+            currentTimeCredit = currentTimeCredit/15;
+            currentTimeCredit = (currentTimeCredit * 0.1); 
+            currentTimeCredit = (currentTimeCredit - currentCredit);
+            currentTimeCredit = currentTimeCredit *(-1);
+            //Text that only show up if the credit is negative - 40381
+            if(currentTimeCredit<0)
+            {
+                System.out.println("You need to add" + currentTimeCredit + " €");
+            }
             System.out.println("How much credit do you want to deposit");
             int inputNumberCredit = scanner.nextInt();
 
@@ -119,7 +128,7 @@ public class Main {
                 }
             }
 
-            System.out.println("Your current credit is :" + currentCredit);
+            System.out.println("Your current credit is :" + currentCredit + " €"); // Added the € symbol - 40381
         }
        
     }
