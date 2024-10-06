@@ -7,11 +7,7 @@ public class Main {
       
         System.out.println("Please insert your user id to enter");
 
-        //Create the data of the student
-        //Test the millestone
-        //Test the millestone2
-        //Test the millestone3
-        
+        //Create data for the student - 40381
         List<Student> students = new ArrayList<>();
 
         for (int i = 1; i <= 49999; i++) {
@@ -25,16 +21,22 @@ public class Main {
             int carPark = (int) (Math.random() * 2);
             students.add(new Student(i, time, credit, timeCredit, carPark));
         }
-
+        // Read the response of the student - 40381
         Scanner scanner = new Scanner(System.in);
         int inputId = scanner.nextInt();
 
         int currentId = 0;
-        long currentTime;
+        long currentTime = 0;
         double currentCredit = 0;
         double currentTimeCredit = 0;
         int currentCarPark = 0;
+        // Variables to check the time in hours and minutes - 40381
+        long currentTimeHours = 0;
+        long currentTimeMinutes = 0;
+        long currentTimeHoursAvailable = 0;
+        long currentTimeMinutesAvailable = 0;
 
+        // Login of the student - 40381
         boolean isValid = false;
         for (Student student : students) {
             if (student.id == inputId) {
@@ -45,8 +47,12 @@ public class Main {
                 currentTimeCredit = student.timeCredit;
                 currentCarPark = student.carPark;
                 System.out.println("Login successful");
-                System.out.println("Time: " + currentTime);
+                //Convert the time from minutes to hours and minutes in order for the student to check propelly the time - 40381
+                currentTimeHours = currentTime/60;
+                currentTimeMinutes = currentTime % 60;
+                System.out.println("Time: " + currentTimeHours + " Hours : " + currentTimeMinutes + "Minutes");
                 System.out.println("Credit: " + currentCredit);
+                
                 System.out.println("Time Avaliable: " + currentTimeCredit);
                 System.out.println("Car Park: " + (currentCarPark == 0 ? "No" : "Yes"));
             }
@@ -58,7 +64,7 @@ public class Main {
         }
        
 
-        //Add the car of the student to the park
+        //Add the car of the student to the park - 40381
         
        
         if (currentCarPark == 0)
@@ -84,7 +90,7 @@ public class Main {
             System.out.println("All Done For Now");
         }
 
-        //Add more credit to the student so he can pay 
+        //Add more credit to the student so he can pay - 40381
         
         if (currentTimeCredit<0)
         {
