@@ -96,7 +96,23 @@ public class Main {
                 }
             }
         } else {
-            System.out.println("Your car is already parked.");
+            // If the car is already parked, the user have the option to remove it - 42872
+            System.out.println("Your car is already parked. Do you wish to remove your car from the park?");
+            System.out.println("Y/N");
+            String inputRemoveCarPark = scanner.next();
+
+            if (inputRemoveCarPark.equalsIgnoreCase("Y")) {
+                currentCarPark = 0;
+                carsInPark--;
+                for (Student student : students) {
+                    if (student.id == currentId) {
+                        student.carPark = 0;
+                    }
+                }
+                System.out.println("The car was removed from the park.");
+            } else {
+                System.out.println("OK");
+            }
         }
         //Add more credit to the student so he can pay - 40381
         if (currentTimeCredit<0)
