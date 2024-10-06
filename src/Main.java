@@ -10,6 +10,10 @@ public class Main {
         //Create data for the student - 40381
         List<Student> students = new ArrayList<>();
 
+        // Maximum capacity of 500 cars in the parking lot
+        int maxCarCapacity = 500;
+        int carsInPark = 0;  // Counter for currently parked cars
+
         for (int i = 1; i <= 49999; i++) {
             long time = System.currentTimeMillis(); 
             double credit = Math.random() * 100;
@@ -19,7 +23,11 @@ public class Main {
             timeCredit = (long) (timeCredit / 0.1); 
             timeCredit = timeCredit*15;
             int carPark = (int) (Math.random() * 2);
-            students.add(new Student(i, time, credit, timeCredit, carPark));// teste salgado 3
+            // Count how many cars are initially parked
+            if (carPark == 1) {
+                carsInPark++;
+            }
+            students.add(new Student(i, time, credit, timeCredit, carPark));
         }
         // Read the response of the student - 40381
         Scanner scanner = new Scanner(System.in);
@@ -66,29 +74,27 @@ public class Main {
        
 
         //Add the car of the student to the park - 40381
-        
-       
-        if (currentCarPark == 0)
-        {
-            
-            System.out.println("Do you wish to park your car?");
-            System.out.println("Y/N");
-            String inputCarPark = scanner.next();
-            
-            if (inputCarPark.equalsIgnoreCase("Y"))
-            {
-                currentCarPark = 1;
-                System.out.println("The Car was park");
+
+
+        if (currentCarPark == 0) {
+            // Check if there are available parking spots
+            if (carsInPark >= maxCarCapacity) {
+                System.out.println("The parking lot is full. No more cars can be parked.");
+            } else {
+                System.out.println("Do you wish to park your car?");
+                System.out.println("Y/N");
+                String inputCarPark = scanner.next();
+
+                if (inputCarPark.equalsIgnoreCase("Y")) {
+                    currentCarPark = 1;
+                    carsInPark++;  // Increment the number of parked cars
+                    System.out.println("The car was parked.");
+                } else {
+                    System.out.println("OK");
+                }
             }
-            else
-            {
-                currentCarPark = 0;
-                System.out.println("OK");
-            }
-        }
-        else
-        {
-            System.out.println("All Done For Now");
+        } else {
+            System.out.println("Your car is already parked.");
         }
 
         //Add more credit to the student so he can pay - 40381
