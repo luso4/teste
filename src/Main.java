@@ -109,36 +109,35 @@ public class Main {
             System.out.println("Your current credit is :" + currentCredit);
         }
 
-        //See the student that pay the most for parking
-        //Read a text file containing student parking payment information.
-        //Format: yyyy-mm-dd#minutes#amount paid
+        //See the student that pay the most for parking - 43305
+        //Read a text file containing student parking payment information. - 43305
+        //Format: yyyy-mm-dd#minutes#amount paid - 43305
         Student topStudent = null;
-        double maxGasto = 0.0;
+        double maxSpending = 0.0;
         for (Student student : students) {
             String fileName = "data/" + student.id + ".txt";
             File file = new File(fileName);
             if (file.exists()) {
-                double totalPagamentos = 0.0;
+                double totalPayments = 0.0;
                 try (Scanner scanner_file = new Scanner(file)) {
                     while (scanner_file.hasNextLine()) {
-                        String linha = scanner_file.nextLine();
-                        String[] partes = linha.split("#");
-                        double valorPagoo = Double.parseDouble(partes[2]);
-                        totalPagamentos += valorPagoo;
+                        String line = scanner_file.nextLine();
+                        String[] parts = line.split("#");
+                        totalPayments += Double.parseDouble(parts[2]);
                     }
                 } catch (IOException e) {
 
                 }
-                if (totalPagamentos > maxGasto) {
-                    maxGasto = totalPagamentos;
+                if (totalPayments > maxSpending) {
+                    maxSpending = totalPayments;
                     topStudent = student;
                 }
             }
         }
         if (topStudent != null) {
-            System.out.println("O estudante que mais gastou foi " + topStudent.id + ". Total gasto de €" + String.format("%.2f", maxGasto));
+            System.out.println("The student who spent the most was " + topStudent.id + ". Total spent de €" + String.format("%.2f", maxSpending));
         } else {
-            System.out.println("Nenhum estudante encontrado fez pagamento.");
+            System.out.println("No students were found with payments.");
         }
 
        
