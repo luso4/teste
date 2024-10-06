@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +108,39 @@ public class Main {
 
             System.out.println("Your current credit is :" + currentCredit);
         }
+
+        //See the student that pay the most for parking
+        //Read a text file containing student parking payment information.
+        //Format: yyyy-mm-dd#minutes#amount paid
+        Student topStudent = null;
+        double maxGasto = 0.0;
+        for (Student student : students) {
+            String fileName = "data/" + student.id + ".txt";
+            File file = new File(fileName);
+            if (file.exists()) {
+                double totalPagamentos = 0.0;
+                try (Scanner scanner_file = new Scanner(file)) {
+                    while (scanner_file.hasNextLine()) {
+                        String linha = scanner_file.nextLine();
+                        String[] partes = linha.split("#");
+                        double valorPagoo = Double.parseDouble(partes[2]);
+                        totalPagamentos += valorPagoo;
+                    }
+                } catch (IOException e) {
+
+                }
+                if (totalPagamentos > maxGasto) {
+                    maxGasto = totalPagamentos;
+                    topStudent = student;
+                }
+            }
+        }
+        if (topStudent != null) {
+            System.out.println("O estudante que mais gastou foi " + topStudent.id + ". Total gasto de €" + String.format("%.2f", maxGasto));
+        } else {
+            System.out.println("Nenhum estudante encontrado fez pagamento.");
+        }
+
        
     }
 }
