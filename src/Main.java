@@ -39,15 +39,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int inputId = scanner.nextInt();
 
-        // Contabilizar o tempo de estacionamento e o valor a pagar (considera que a cada 15 min o aluno paga 0.10 €)
-        String dataAtual = LocalDate.now().toString();
+        // Count the parking time and the amount to be paid (considering that every 15 minutes the student pays €0.10) - 43305
+        String currentData  = LocalDate.now().toString();
         Random random = new Random();
-        int tempoEstacionamentoMinutos = random.nextInt(240); // Tempo aleatório - máximo 240 minutos
-        double valorPago = (tempoEstacionamentoMinutos / 15) * 0.10; //valor a pagar  (0,10 € por cada 15 minutos)
+        int parkingTimeMinutes = random.nextInt(240); // random - máx 240 minutes - 43305
+        double amountPaid = (parkingTimeMinutes / 15) * 0.10; //amount to pay (€0.10 for every 15 minutes) - 43305
 
-        //O tempo de estacionamento deve ser guardado num ficheiro bem como o valor pago pelo aluno
+        //The parking time and the amount paid by the student must be saved in a file- 43305
         try (FileWriter file = new FileWriter("data/" + inputId + ".txt", true)) {
-            file.write(dataAtual +"#"+tempoEstacionamentoMinutos+"#"+String.format("%.2f", valorPago) + "\n");
+            file.write(currentData  +"#"+parkingTimeMinutes+"#"+String.format("%.2f", amountPaid) + "\n");
         } catch (IOException e) {
 
         }
