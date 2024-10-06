@@ -1,3 +1,7 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,19 @@ public class Main {
         // Read the response of the student - 40381
         Scanner scanner = new Scanner(System.in);
         int inputId = scanner.nextInt();
+
+        // Contabilizar o tempo de estacionamento e o valor a pagar (considera que a cada 15 min o aluno paga 0.10 €)
+        String dataAtual = LocalDate.now().toString();
+        Random random = new Random();
+        int tempoEstacionamentoMinutos = random.nextInt(240); // Tempo aleatório - máximo 240 minutos
+        double valorPago = (tempoEstacionamentoMinutos / 15) * 0.10; //valor a pagar  (0,10 € por cada 15 minutos)
+
+        //O tempo de estacionamento deve ser guardado num ficheiro bem como o valor pago pelo aluno
+        try (FileWriter file = new FileWriter("data/" + inputId + ".txt", true)) {
+            file.write(dataAtual +"#"+tempoEstacionamentoMinutos+"#"+String.format("%.2f", valorPago) + "\n");
+        } catch (IOException e) {
+
+        }
 
         int currentId = 0;
         long currentTime = 0;
