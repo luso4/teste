@@ -8,6 +8,7 @@ public class Main {
         System.out.println("Please insert your user id to enter");
 
         //Create the data of the student
+        //Test the millestone
         List<Student> students = new ArrayList<>();
 
         for (int i = 1; i <= 49999; i++) {
