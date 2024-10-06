@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-      
+
         System.out.println("Please insert your user id to enter");
 
         //Create data for the student - 40381
@@ -16,14 +16,14 @@ public class Main {
 
 
         for (int i = 1; i <= 2; i++) {
-            long time = 300; 
+            long time = 300;
             double credit = 1;
             //Change too double to allow the math in decimals - 40381
-            double timeCredit = time/15;
-            timeCredit = (double) (timeCredit * 0.1); 
+            double timeCredit = time / 15;
+            timeCredit = (double) (timeCredit * 0.1);
             timeCredit = (double) (credit - timeCredit);
-            timeCredit = (double) (timeCredit / 0.1); 
-            timeCredit = (long)timeCredit*15;
+            timeCredit = (double) (timeCredit / 0.1);
+            timeCredit = (long) timeCredit * 15;
             int carPark = (int) (Math.random() * 2);
             // Count how many cars are initially parked - 42872
             if (carPark == 1) {
@@ -58,7 +58,7 @@ public class Main {
                 currentCarPark = student.carPark;
                 System.out.println("Login successful");
                 //Convert the time from minutes to hours and minutes in order for the student to check propelly the time - 40381
-                currentTimeHours = currentTime/60;
+                currentTimeHours = currentTime / 60;
                 currentTimeMinutes = currentTime % 60;
                 System.out.println("Time: " + currentTimeHours + " Hours : " + currentTimeMinutes + " Minutes");
                 System.out.println("Credit: " + currentCredit + " €"); // Added the € symbol - 40381
@@ -68,16 +68,15 @@ public class Main {
                 System.out.println("Car Park: " + (currentCarPark == 0 ? "No" : "Yes"));
             }
         }
-        if (isValid == false)
-        {
+        if (isValid == false) {
             System.out.println("Login failed");
             scanner.close();
         }
-       
+
 
         //Add the car of the student to the park - 40381
-        
-       
+
+
         if (currentCarPark == 0) {
             // Check if there are available parking spots
             if (carsInPark >= maxCarCapacity) {
@@ -97,60 +96,69 @@ public class Main {
             }
         } else {
             // If the car is already parked, the user have the option to remove it - 42872
-            System.out.println("Your car is already parked. Do you wish to remove your car from the park?");
-            System.out.println("Y/N");
-            String inputRemoveCarPark = scanner.next();
+            if (currentTimeCredit >= 0) {
+                System.out.println("Your car is already parked. Do you wish to remove your car from the park?");
+                System.out.println("Y/N");
+                String inputRemoveCarPark = scanner.next();
+                if (inputRemoveCarPark.equalsIgnoreCase("Y")) {
+                    currentCarPark = 0;
+                    carsInPark--;
+                    for (Student student : students) {
+                        if (student.id == currentId) {
+                            student.carPark = 0;
+                        }
+                    }
+                    System.out.println("The car was removed from the park.");
+                } else {
+                    System.out.println("OK");
+                }
+            } else {
+                // If the student doesn't have enough credit - 42872
+                System.out.println("You don't have enough credit to remove your car.");
+                System.out.println("Do you wish to add credit? Y/N");
+                String inputAddCredit = scanner.next();
 
-            if (inputRemoveCarPark.equalsIgnoreCase("Y")) {
-                currentCarPark = 0;
-                carsInPark--;
-                for (Student student : students) {
-                    if (student.id == currentId) {
-                        student.carPark = 0;
+                if (inputAddCredit.equalsIgnoreCase("Y")) {
+                    //Math to see whats the minimum the user need to add in order to remove the car - 40381
+                    currentTimeCredit = currentTimeCredit / 15;
+                    currentTimeCredit = (currentTimeCredit * 0.1);
+                    currentTimeCredit = (currentTimeCredit - currentCredit);
+                    currentTimeCredit = currentTimeCredit * (-1); //Text that only show up if the credit is negative - 40381
+                    System.out.println("You need to add " + currentTimeCredit + " €");
+                    System.out.println("How much credit do you want to deposit?");
+                    int inputNumberCredit = scanner.nextInt();
+
+
+                    // Update the student's credit - 42872
+                    for (Student student : students) {
+                        if (student.id == currentId) {
+                            student.credit = currentCredit + inputNumberCredit;
+                            currentCredit = student.credit;
+                        }
+                    }
+
+                    System.out.println("Your current credit is: " + currentCredit);
+
+                    System.out.println("You now have enough credit. Do you wish to remove your car from the parking?");
+                    System.out.println("Y/N");
+                    String inputRemoveCar = scanner.next();
+
+                    if (inputRemoveCar.equalsIgnoreCase("Y")) {
+                        currentCarPark = 0;
+                        carsInPark--;  // Decrement the number of parked cars
+                        for (Student student : students) {
+                            if (student.id == currentId) {
+                                student.carPark = 0;
+                            }
+                        }
+                        System.out.println("The car was removed from the parking.");
+                    } else {
+                        System.out.println("OK");
                     }
                 }
-                System.out.println("The car was removed from the park.");
-            } else {
-                System.out.println("OK");
-            }
-        }
-        //Add more credit to the student so he can pay - 40381
-        if (currentTimeCredit<0)
-        {
-            System.out.println("You currently have less credit that you need to pay do you wish to add credit");
-            System.out.println("Y/N");
-
-        }
-
-        String inputMoreCredit = scanner.next();
-
-        if(inputMoreCredit.equals("Y"))
-        {
-
-
-            //Math to see whats the minimum the user need to add in order to remove the car - 40381
-
-            currentTimeCredit = currentTimeCredit/15;
-            currentTimeCredit = (currentTimeCredit * 0.1); 
-            currentTimeCredit = (currentTimeCredit - currentCredit);
-            currentTimeCredit = currentTimeCredit *(-1);
-            //Text that only show up if the credit is negative - 40381
-            if(currentTimeCredit>0)
-            {
-                System.out.println("You need to add " + currentTimeCredit + " €");
-            }
-            System.out.println("How much credit do you want to deposit");
-            int inputNumberCredit = scanner.nextInt();
-
-            for (Student student : students) {
-                if (student.id == currentId) { 
-                    student.credit = currentCredit + inputNumberCredit; 
-                    currentCredit = student.credit;
-                }
             }
 
-            System.out.println("Your current credit is :" + currentCredit + " €"); // Added the € symbol - 40381
+
         }
-       
     }
 }
