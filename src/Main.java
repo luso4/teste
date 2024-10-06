@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -177,5 +179,39 @@ public class Main {
 
 
         }
+
+
+        //See the student that pay the most for parking - 43305
+        //Read a text file containing student parking payment information. - 43305
+        //Format: yyyy-mm-dd#minutes#amount paid - 43305
+        Student topStudent = null;
+        double maxSpending = 0.0;
+        for (Student student : students) {
+            String fileName = "data/" + student.id + ".txt";
+            File file = new File(fileName);
+            if (file.exists()) {
+                double totalPayments = 0.0;
+                try (Scanner scanner_file = new Scanner(file)) {
+                    while (scanner_file.hasNextLine()) {
+                        String line = scanner_file.nextLine();
+                        String[] parts = line.split("#");
+                        totalPayments += Double.parseDouble(parts[2]);
+                    }
+                } catch (IOException e) {
+
+                }
+                if (totalPayments > maxSpending) {
+                    maxSpending = totalPayments;
+                    topStudent = student;
+                }
+            }
+        }
+        if (topStudent != null) {
+            System.out.println("The student who spent the most was " + topStudent.id + ". Total spent de €" + String.format("%.2f", maxSpending));
+        } else {
+            System.out.println("No students were found with payments.");
+        }
+
+
     }
 }
