@@ -1,5 +1,12 @@
 This is the repository for the WorkSheet 4
 
+Always Download from the master Branch but work on your Branch
+When you enter new code comment what it does with your student Number
+If you want to alter some code create a new ISSUE so that all the member know that is something being change
+When pulling to the master Branch put my Name (Luso4) as the code Review
+
+  
+
 Software Quality
 Degree in Informatic Engineering
 1st Semester 2024/2025
