@@ -9,6 +9,7 @@ public class Main {
 
         //Create the data of the student
         //Test the millestone
+        //Test the millestone2
         List<Student> students = new ArrayList<>();
 
         for (int i = 1; i <= 49999; i++) {
