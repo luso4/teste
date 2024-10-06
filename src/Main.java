@@ -1,3 +1,7 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,19 @@ public class Main {
         // Read the response of the student - 40381
         Scanner scanner = new Scanner(System.in);
         int inputId = scanner.nextInt();
+
+        // Count the parking time and the amount to be paid (considering that every 15 minutes the student pays €0.10) - 43305
+        String currentData  = LocalDate.now().toString();
+        Random random = new Random();
+        int parkingTimeMinutes = random.nextInt(240); // random - máx 240 minutes - 43305
+        double amountPaid = (parkingTimeMinutes / 15) * 0.10; //amount to pay (€0.10 for every 15 minutes) - 43305
+
+        //The parking time and the amount paid by the student must be saved in a file- 43305
+        try (FileWriter file = new FileWriter("data/" + inputId + ".txt", true)) {
+            file.write(currentData  +"#"+parkingTimeMinutes+"#"+String.format("%.2f", amountPaid) + "\n");
+        } catch (IOException e) {
+
+        }
 
         int currentId = 0;
         long currentTime = 0;
