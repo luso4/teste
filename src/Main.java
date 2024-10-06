@@ -113,7 +113,7 @@ public class Main {
                     System.out.println("OK");
                 }
             } else {
-                // If the student doesn't have enough credit
+                // If the student doesn't have enough credit - 42872
                 System.out.println("You don't have enough credit to remove your car.");
                 System.out.println("Do you wish to add credit? Y/N");
                 String inputAddCredit = scanner.next();
@@ -122,7 +122,7 @@ public class Main {
                     System.out.println("How much credit do you want to deposit?");
                     int inputNumberCredit = scanner.nextInt();
 
-                    // Update the student's credit
+                    // Update the student's credit - 42872
                     for (Student student : students) {
                         if (student.id == currentId) {
                             student.credit = currentCredit + inputNumberCredit;
